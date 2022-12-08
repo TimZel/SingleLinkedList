@@ -1,7 +1,6 @@
 public class SingleLinkedList implements MyList {
 
     Node head; // указатель на первый элемент
-    Node tail; // указатель последний элемент
     public boolean isEmpty() { //если указатель 1го элемента - нулл, список пуст
         return head == null;
     }
@@ -45,7 +44,6 @@ public class SingleLinkedList implements MyList {
         return -1; //если нет, вернет -1
     }
     public int getElement(int index) {
-        SingleLinkedList list = new SingleLinkedList();
         Node current = head;
         int counter = 0; //счетчик - нуль
         while(current != null) { //пока элемент существует - ищу
@@ -68,30 +66,20 @@ public class SingleLinkedList implements MyList {
         return false; //иначе false
     }
 
-    public void addFront(int data) {//добавить спереди
-        Node newNode = new Node(data);  //создаю новый элемент
-        newNode.data = data; //инициализирую данные.
-        // указатель на следующий элемент автоматически инициализируется как null
-        if(head == null) { //если список пуст
-            head = newNode ;  //то указываю ссылки начала и конца на новый элемент
-            tail = newNode ; //т.е. список теперь состоит из одного элемента
-        } else {
-            newNode.next = head; //иначе новый элемент теперь ссылается на "бывший" первый
-            head = newNode;    //а указатель на первый элемент теперь ссылается на новый элемент
+    public void addFront(int value){//добавить спереди
+        Node newNode=new Node(value);//создаю новый элемент
+        if(head.next != null){ //если след элемент существует
+            newNode.next = head.next; //передаю ссылку на него новому в качестве след-го для нового
         }
+        head.next = newNode; //новый элемент становится следующим для текущего
     }
-    void addBack(int data) {  //добавление в конец списка
-        Node newNode = new Node(data);  //создаю новый элемент
-        newNode.data = data;
-        if (tail == null) { //если список пуст
-            head = newNode;  //то указываю ссылки начала и конца на новый элемент
-            tail = newNode; //т.е. список теперь состоит из одного элемента
-        } else {
-            tail.next = newNode;//иначе "старый" последний элемент теперь ссылается на новый
-            tail = newNode; //а в указатель на последний элемент записываю адрес нового элемента
+    public void addBack(int value){ //добавление в конец списка
+        Node newNode = new Node(value); //создаю новый элемент
+        if(head != null) { //если текущий элемент существует
+            newNode.next = head; //делаю его следующим для нового
         }
+        head = newNode; //иначе текущий - новый
     }
-
     void printList() { //печать списка
         Node current = head;       //получаю ссылку на первый элемент
         while (current != null) { //пока элемент существует
@@ -104,23 +92,13 @@ public class SingleLinkedList implements MyList {
         if(head == null) { //если список пуст -
             return;   //ничего не делаю
         }
-        if (head == tail) {//если список состоит из одного элемента
-            head = null;  //очищаю указатели начала и конца
-            tail = null;
-            return;  //и выхожу
-        }
-
         if (head.data == data) { //если первый элемент - тот, что нужен
             head = head.next;    //переключаюуказатель начала на второй элемент
             return;              //и выхожу
         }
-
         Node current = head;       //иначе начинаю искать
         while (current.next != null) {    //пока следующий элемент существует
             if (current.next.data == data) {  //проверяю следующий элемент
-                if(tail == current.next) {     //если он последний
-                    tail = current;           //то указатель последнего ставлю на текущий
-                }
                 current.next = current.next.next;   //найденный элемент выкидываю
                 return;                 //и выхожу
             } else {
