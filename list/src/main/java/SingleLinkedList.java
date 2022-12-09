@@ -67,18 +67,17 @@ public class SingleLinkedList implements MyList {
     }
 
     public void addFront(int value){//добавить спереди
-        Node newNode=new Node(value);//создаю новый элемент
-        if(head.next != null){ //если след элемент существует
-            newNode.next = head.next; //передаю ссылку на него новому в качестве след-го для нового
-        }
-        head.next = newNode; //новый элемент становится следующим для текущего
-    }
-    public void addBack(int value){ //добавление в конец списка
         Node newNode = new Node(value); //создаю новый элемент
-        if(head != null) { //если текущий элемент существует
-            newNode.next = head; //делаю его следующим для нового
-        }
+        newNode.next = head; //делаю его следующим для нового
         head = newNode; //иначе текущий - новый
+    }
+    public void addBack(int value){ //добавить сзади
+        Node newnode = new Node(value); //создаю новый элемент
+        Node current = head; //получаю ссылку на первый элемент
+        while(current.next!=null) { //перехожу в конец списка
+            current = current.next;
+        }
+        current.next = newnode; //добавляю в конец новую запись
     }
     void printList() { //печать списка
         Node current = head;       //получаю ссылку на первый элемент
