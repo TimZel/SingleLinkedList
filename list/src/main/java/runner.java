@@ -3,11 +3,11 @@
 public class runner {
     public static void main(String[] args) {
         SingleLinkedList list = new SingleLinkedList();
-        list.addBack(1);
-        list.addFront(2);
-        list.addFront(3);
-        list.addFront(6);
+        list.addFront(1);
         list.insertAfter(0, 9);
+        list.addBack(7);
+        list.addFront(8);
+        list.addFront(2);
 
         System.out.println("elements of list: ");
         list.printList();
@@ -31,7 +31,7 @@ public class runner {
 
         System.out.println();
         System.out.println("position of data : ");
-        System.out.println(list.getIndex(3));
+        System.out.println(list.getIndex(7));
 
         System.out.println();
         System.out.println("show requested elemented by index: ");
